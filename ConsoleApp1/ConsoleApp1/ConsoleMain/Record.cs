@@ -5,6 +5,7 @@ using ConsoleApp2.Main.Vitesse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,6 @@ namespace ConvertConsole2.ConsoleMain
 {
     internal class Record
     {
-
         internal static double num1;
         internal static double result = 0;
         internal static string unit1 = "";
@@ -96,8 +96,8 @@ namespace ConvertConsole2.ConsoleMain
         internal const int LIGNE7_PEAK_L = 18;
         internal const int LIGNE6_PEAK_M = 16;
         internal const int LIGNE7_PEAK_M = 17;
-        internal const int LIGNE6_PEAK_T = 17;
-        internal const int LIGNE7_PEAK_T = 18;
+        internal const int LIGNE6_PEAK_T = 16;
+        internal const int LIGNE7_PEAK_T = 17;
         internal const int LIGNE6_PEAK_V = 11;
         internal const int LIGNE7_PEAK_V = 12;
 
