@@ -148,7 +148,10 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                     {
                         Console.WriteLine("Clear");
                         Console.Clear();
+                        ConvertConsole2.ConsoleMain.Record.list_Longueur = false;
                         ConvertConsole2.ConsoleMain.Record.list_Masse = false;
+                        ConvertConsole2.ConsoleMain.Record.list_Temps = false;
+                        ConvertConsole2.ConsoleMain.Record.list_Vitesse = false;
                         FormulaireDevise();
 
                     }
@@ -479,8 +482,8 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                 }
                 if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_V)
                 {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "pied/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2);return; }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "pied/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); return; }
+                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "pied/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
+                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "pied/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1);  }
                 }
             }
         }

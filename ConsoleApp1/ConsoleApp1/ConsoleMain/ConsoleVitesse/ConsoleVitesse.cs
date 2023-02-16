@@ -47,6 +47,7 @@ namespace ConsoleApp2.Main.Vitesse
             {
                 Console.Write("1er - le nombre à convertir : ");
             }
+            ConvertConsole2.ConsoleMain.Record.unit_select = true;
             //num1 = Convert.ToInt64(Console.ReadLine());
             Console.Write("2ieme - l'unité de base à convertir : ");
             unit1 = Console.ReadLine();

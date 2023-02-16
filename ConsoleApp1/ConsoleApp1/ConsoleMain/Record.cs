@@ -19,8 +19,8 @@ namespace ConvertConsole2.ConsoleMain
     {
         internal static double num1;
         internal static double result = 0;
-        internal static string unit1 = "";
-        internal static string unit2 = "";
+        internal static string unit1 = "1";
+        internal static string unit2 = "2";
         internal static double ratio;
         internal static double ratioCalc1 = 1;
         internal static double ratioCalc2 = 1;

@@ -15,7 +15,6 @@ namespace ConsoleApp2.Main.Longueur
         string unit1 = "";
         string unit2 = "";
         double ratio;
-        string devise;
         double ratioCalc1 = 1;
         double ratioCalc2 = 1;
 
