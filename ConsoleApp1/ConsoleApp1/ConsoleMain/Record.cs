@@ -5,7 +5,7 @@ using ConsoleApp2.Main.Vitesse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,10 +17,103 @@ namespace ConvertConsole2.ConsoleMain
 {
     internal class Record
     {
-        internal static double num1;
+        private static Action? _AffichePromptInput;
+
+        internal static Action? AffichePromptInput
+        {
+            get => _AffichePromptInput;
+            set => _AffichePromptInput = value;
+        }
+
+        private static Action? _Cacule;
+
+        internal static Action? Cacule
+        {
+            get => _Cacule;
+            set => _Cacule = value;
+        }
+
+        private static Action? _AfficheResultat;
+
+        internal static Action? AfficheResultat
+        {
+            get => _AfficheResultat;
+            set => _AfficheResultat = value;
+        }
+
+        private static Nullable<double> _num1 = default;
+        internal static double num1
+        {
+            get => _num1.GetValueOrDefault(0);
+            set
+            {
+                if (value != _num1)
+                {
+                    _num1 = value;
+
+                    if (CanCalc())
+                    {
+                        _Cacule?.Invoke();
+                    }
+                }
+            }
+        }
+
+        private static string _unit1 = "";
+        internal static string unit1
+        {
+            get => _unit1;
+            set
+            {
+                if (value != _unit1)
+                {
+                    _unit1 = value;
+
+                    if (string.IsNullOrEmpty(_unit1) == false)
+                    {
+                        unit_select = true;
+                    }
+
+                    if (CanAffichePrompt())
+                    {
+                        AffichePromptInput?.Invoke();
+                    }
+
+                    if (CanCalc())
+                    {
+                        _Cacule?.Invoke();
+                    }
+                }
+            }
+        }
+
+        private static string _unit2 = "";
+        internal static string unit2
+        {
+            get => _unit2;
+            set
+            {
+                if (value != _unit2)
+                {
+                    _unit2 = value;
+
+                    if (CanAffichePrompt())
+                    {
+                        AffichePromptInput?.Invoke();
+                    }
+
+                    if (CanCalc())
+                    {
+                        _Cacule?.Invoke();
+                        AfficheResultat?.Invoke();
+                    }
+                }
+            }
+        }
+
         internal static double result = 0;
-        internal static string unit1 = "3";
-        internal static string unit2 = "3";
+
+
         internal static double ratio;
         internal static double ratioCalc1 = 1;
         internal static double ratioCalc2 = 1;
@@ -29,6 +122,8 @@ namespace ConvertConsole2.ConsoleMain
         internal static bool list_Temps = false;
         internal static bool list_Vitesse = false;
         internal static bool unit_select = false;
+        internal static bool fini = false;
+        internal static int compteur = 0;
 
         internal const int BTN_PRESS = 0x0001;
         internal const int LIGNE1 = 1;
@@ -96,10 +191,25 @@ namespace ConvertConsole2.ConsoleMain
         internal const int LIGNE7_PEAK_L = 18;
         internal const int LIGNE6_PEAK_M = 16;
         internal const int LIGNE7_PEAK_M = 17;
-        internal const int LIGNE6_PEAK_T = 16;
-        internal const int LIGNE7_PEAK_T = 17;
+        internal const int LIGNE6_PEAK_T = 17;
+        internal const int LIGNE7_PEAK_T = 18;
         internal const int LIGNE6_PEAK_V = 11;
         internal const int LIGNE7_PEAK_V = 12;
 
+        internal static bool CanAffichePrompt()
+        {
+            return string.IsNullOrEmpty(unit1) == false
+                && string.IsNullOrEmpty(unit2) == false
+                && _AffichePromptInput != null;
+        }
+
+        internal static bool CanCalc()
+        {
+            return string.IsNullOrEmpty(unit1) == false
+                && string.IsNullOrEmpty(unit2) == false
+                && _num1.HasValue
+                && _Cacule != null
+                && _AfficheResultat != null;
+        }
     }
 }

@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApp2.Main;
+using ConvertConsole2.ConsoleMain;
 
 namespace ConsoleApp2.Main.Vitesse
 {
     public class ConsoleVitesse
     {
+        public ConsoleVitesse(Action? afficheResultat, Action? affichePromptInput)
+        {
+            Record.AfficheResultat = afficheResultat;
+            Record.AffichePromptInput = affichePromptInput;
+        }
 
-        double num1;
-        double result = 0;
-        string unit1 = ConvertConsole2.ConsoleMain.Record.unit1;
-        string unit2 = ConvertConsole2.ConsoleMain.Record.unit2;
         double ratio;
         double ratioCalc1 = 1;
         double ratioCalc2 = 1;
@@ -37,105 +39,84 @@ namespace ConsoleApp2.Main.Vitesse
         }
 
 
-        public void Formulaire()
-        {
-            Console.Write("1er - le nombre à convertir : ");
-            while (double.TryParse(Console.ReadLine(), out num1) == false)
-            {
-                Console.Write("1er - le nombre à convertir : ");
-            }
-            ConvertConsole2.ConsoleMain.Record.unit_select = true;
-            //num1 = Convert.ToInt64(Console.ReadLine());
-            Console.Write("2ieme - l'unité de base à convertir : ");
-            unit1 = Console.ReadLine();
-            Console.Write("3ieme - l'unité de convertion : ");
-            unit2 = Console.ReadLine();
-        }
-
-
-        //Vitesse///////////////////////////////////////////////////
+        //Vitesse//////////////////////////////////////
 
 
         public void CalculVitesse()
         {
-            if (unit1 == "x" || unit1 == "X" || unit1 == "quitter" || unit1 == "Quitter")
+            if (Record.unit1 == "x" || Record.unit1 == "X" || Record.unit1 == "quitter" || Record.unit1 == "Quitter")
             {
                 Console.WriteLine("Vous allez quitter l'application");
                 Environment.Exit(0);
             }
-            if (unit2 == "x" || unit2 == "X" || unit2 == "quitter" || unit2 == "Quitter")
+            if (Record.unit2 == "x" || Record.unit2 == "X" || Record.unit2 == "quitter" || Record.unit2 == "Quitter")
             {
                 Environment.Exit(0);
             }
-            if (unit1 == "c" || unit1 == "C" || unit1 == "clear" || unit1 == "Clear")
+            if (Record.unit1 == "c" || Record.unit1 == "C" || Record.unit1 == "clear" || Record.unit1 == "Clear")
             {
                 Console.Clear();
             }
-            if (unit2 == "c" || unit2 == "C" || unit2 == "clear" || unit2 == "Clear")
+            if (Record.unit2 == "c" || Record.unit2 == "C" || Record.unit2 == "clear" || Record.unit2 == "Clear")
             {
                 Console.Clear();
             }
-            if (((unit1 == "1" || unit1 == "2" || unit1 == "3" || unit1 == "5" || unit1 == "4" || unit1 == "6") && (unit2 == "1" || unit2 == "2" || unit2 == "3" || unit2 == "5" || unit2 == "4" || unit2 == "6")) || ((unit1 == "metre/seconde" || unit1 == "metre/heure" || unit1 == "kilometre/heure" || unit1 == "mile/heure" || unit1 == "kilometre/seconde" || unit1 == "pied/seconde" || unit1 == "x" || unit1 == "X") && (unit2 == "metre/seconde" || unit2 == "metre/heure" || unit2 == "kilometre/heure" || unit2 == "mile/heure" || unit2 == "kilometre/seconde" || unit2 == "pied/seconde" || unit2 == "x" || unit2 == "X")))
+            if (((Record.unit1 == "1" || Record.unit1 == "2" || Record.unit1 == "3" || Record.unit1 == "5" || Record.unit1 == "4" || Record.unit1 == "6") && (Record.unit2 == "1" || Record.unit2 == "2" || Record.unit2 == "3" || Record.unit2 == "5" || Record.unit2 == "4" || Record.unit2 == "6")) || ((Record.unit1 == "metre/seconde" || Record.unit1 == "metre/heure" || Record.unit1 == "kilometre/heure" || Record.unit1 == "mile/heure" || Record.unit1 == "kilometre/seconde" || Record.unit1 == "pied/seconde" || Record.unit1 == "x" || Record.unit1 == "X") && (Record.unit2 == "metre/seconde" || Record.unit2 == "metre/heure" || Record.unit2 == "kilometre/heure" || Record.unit2 == "mile/heure" || Record.unit2 == "kilometre/seconde" || Record.unit2 == "pied/seconde" || Record.unit2 == "x" || Record.unit2 == "X")))
             {
 
 
-                if (unit1 == "metre/seconde" || unit1 == "1")
+                if (Record.unit1 == "metre/seconde" || Record.unit1 == "1")
                 {
                     ratioCalc1 = 0.277778;
                 }
-                if (unit1 == "metre/heure" || unit1 == "2")
+                if (Record.unit1 == "metre/heure" || Record.unit1 == "2")
                 {
                     ratioCalc1 = 1000.00008;
                 }
-                if (unit1 == "kilometre/heure" || unit1 == "3")
+                if (Record.unit1 == "kilometre/heure" || Record.unit1 == "3")
                 {
                     ratioCalc1 = 1;
                 }
-                if (unit1 == "kilometre/seconde" || unit1 == "4")
+                if (Record.unit1 == "kilometre/seconde" || Record.unit1 == "4")
                 {
                     ratioCalc1 = 0.00028;
                 }
-                if (unit1 == "mile/heure" || unit1 == "5")
+                if (Record.unit1 == "mile/heure" || Record.unit1 == "5")
                 {
                     ratioCalc1 = 0.62138;
                 }
-                if (unit1 == "pied/seconde" || unit1 == "6")
+                if (Record.unit1 == "pied/seconde" || Record.unit1 == "6")
                 {
                     ratioCalc1 = 0.9114;
                 }
                 //unité de convertion 
 
-                if (unit2 == "metre/seconde" || unit2 == "1")
+                if (Record.unit2 == "metre/seconde" || Record.unit2 == "1")
                 {
                     ratioCalc2 = 0.278;
                 }
-                if (unit2 == "metre/heure" || unit2 == "2")
+                if (Record.unit2 == "metre/heure" || Record.unit2 == "2")
                 {
-                    ratioCalc2 = 1000.00008;
+                    ratioCalc2 = 1000.0000;
                 }
-                if (unit2 == "kilometre/heure" || unit2 == "3")
+                if (Record.unit2 == "kilometre/heure" || Record.unit2 == "3")
                 {
                     ratioCalc2 = 1;
                 }
-                if (unit2 == "kilometre/seconde" || unit2 == "4")
+                if (Record.unit2 == "kilometre/seconde" || Record.unit2 == "4")
                 {
                     ratioCalc2 = 0.000278;
                 }
-                if (unit2 == "mile/heure" || unit2 == "5")
+                if (Record.unit2 == "mile/heure" || Record.unit2 == "5")
                 {
                     ratioCalc2 = 0.62138;
                 }
-                if (unit2 == "pied/seconde" || unit2 == "6")
+                if (Record.unit2 == "pied/seconde" || Record.unit2 == "6")
                 {
                     ratioCalc2 = 0.9113;
                 }
-
-
                 ratio = ratioCalc2 / ratioCalc1;
-                result = num1 * ratio;
-
-                Console.WriteLine("Le résultat est : " + result + " .");
-
+                Record.result = Record.num1 * ratio;
             }
         }
     }

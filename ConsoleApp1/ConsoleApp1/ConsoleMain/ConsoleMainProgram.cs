@@ -4,29 +4,31 @@ using ConsoleApp2.Main.Longueur;
 using ConsoleApp2.Main.Masse;
 using ConsoleApp2.Main.Temps;
 using ConsoleApp2.Main.Vitesse;
-using System;
-using System.Formats.Asn1;
-using System.Numerics;
+using ConvertConsole2.ConsoleMain;
 
-ConsoleLongueur longueur = new();
-ConsoleVitesse vitesse = new();
-ConsoleMasse masse = new();
-ConsoleTemps temps = new();
-
-
+ConsoleLongueur longueur = new(Formulaire, SaisieNombre);
+ConsoleVitesse vitesse = new(Formulaire, SaisieNombre);
+ConsoleMasse masse = new(Formulaire, SaisieNombre);
+ConsoleTemps temps = new(Formulaire, SaisieNombre);
 
 ConsoleListener.MouseEvent += ConsoleListener_MouseEvent;
 ConsoleListener.KeyEvent += ConsoleListener_KeyEvent;
 ConsoleListener.Start();
 FormulaireDevise();
+
 while (ConsoleListener.IsRunning())
 { }
 
 void ConsoleListener_KeyEvent(NativeMethods.KEY_EVENT_RECORD r)
 {
-    if (r.wVirtualKeyCode == (int)ConsoleKey.Escape)
+    if (r.wVirtualKeyCode == (int)ConsoleKey.X)
     {
         ConsoleListener.Stop(); return;
+    }
+    if (r.wVirtualKeyCode == (int)ConsoleKey.C)
+    {
+        Console.Clear();
+        FormulaireDevise();
     }
 }
 
@@ -38,7 +40,7 @@ void ConsoleListener_MouseEvent(NativeMethods.MOUSE_EVENT_RECORD r)
     listPeak(r);
 }
 
-void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
+async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
 {
     if (r.dwButtonState == ConvertConsole2.ConsoleMain.Record.BTN_PRESS)
     {
@@ -62,32 +64,26 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                 {
 
                     longueur.ListeDeviseLongueur();
-                    longueur.Formulaire();
-                    longueur.CalculLongueur();
                     ConvertConsole2.ConsoleMain.Record.list_Longueur = true;
                 }
                 if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2)
                 {
 
                     masse.ListeDeviseMasse();
-                    masse.Formulaire();
-                    masse.CalculMasse();
                     ConvertConsole2.ConsoleMain.Record.list_Masse = true;
                 }
                 if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3)
                 {
                     temps.ListeDeviseTemps();
-                    temps.Formulaire();
-                    temps.CalculTemps();
                     ConvertConsole2.ConsoleMain.Record.list_Temps = true;
                 }
                 if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4)
                 {
                     vitesse.ListeDeviseVitesse();
-                    vitesse.Formulaire();
-                    vitesse.CalculVitesse();
                     ConvertConsole2.ConsoleMain.Record.list_Vitesse = true;
                 }
+
+
             }
 
             if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_2)
@@ -107,6 +103,11 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                 }
             }
         }
+
+
+
+
+
         else if (r.dwButtonState == ConvertConsole2.ConsoleMain.Record.BTN_PRESS)
         {
             if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_1)
@@ -143,6 +144,10 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                     {
                         Console.Clear();
                         Console.WriteLine("Vous allez quittez l'application");
+                        ConvertConsole2.ConsoleMain.Record.list_Longueur = false;
+                        ConvertConsole2.ConsoleMain.Record.list_Masse = false;
+                        ConvertConsole2.ConsoleMain.Record.list_Temps = false;
+                        ConvertConsole2.ConsoleMain.Record.list_Vitesse = false;
                         Environment.Exit(0);
                     }
                     if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_PEAK_L)
@@ -170,8 +175,6 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                     FormulaireDevise();
                 }
             }
-
-
 
             if ((ConvertConsole2.ConsoleMain.Record.list_Longueur == false) && (ConvertConsole2.ConsoleMain.Record.list_Masse == true) && (ConvertConsole2.ConsoleMain.Record.list_Temps == false) && (ConvertConsole2.ConsoleMain.Record.list_Vitesse == false))
             {
@@ -238,7 +241,6 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                 }
             }
 
-
             if ((ConvertConsole2.ConsoleMain.Record.list_Longueur == false) && (ConvertConsole2.ConsoleMain.Record.list_Masse == false) && (ConvertConsole2.ConsoleMain.Record.list_Temps == false) && (ConvertConsole2.ConsoleMain.Record.list_Vitesse == true))
             {
                 if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_2)
@@ -272,219 +274,612 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                 }
             }
 
-        }
-        else if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_3)
-        {
-            if (ConvertConsole2.ConsoleMain.Record.list_Longueur == true)
+
+
+
+
+            if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_3)
             {
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_L)
+                if (ConvertConsole2.ConsoleMain.Record.list_Longueur == true)
                 {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "kilometre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "kilometre";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "eiffel";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "eiffel";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "metre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "metre";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "banane";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "banane";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "centimetre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "centimetre";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "millimetre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "millimetre";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE7_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "micrometre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "micrometre";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE8_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "nanometre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "nanometre";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE9_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "mile";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "mile";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE10_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "yard";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "yard";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE11_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "pied";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "pied";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE12_SELECT_L)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = longueur.CalculLongueur;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "pouce";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "pouce";
+
+                        }
+                    }
                 }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_L)
+
+
+
+
+                if (ConvertConsole2.ConsoleMain.Record.list_Masse == true)
                 {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "eiffel"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "eiffel"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "tonne";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "tonne";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_M)
+                    {
+                        if (
+                            ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "kilogramme";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "kilogramme";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "gramme";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "gramme";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "eiffel";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "eiffel";
+
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "banane";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "banane";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "milligramme";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "milligramme";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE7_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "tonne longue";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "tonne longue";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE8_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "tonne courte";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "tonne courte";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE9_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "livre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "livre";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE10_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "once";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "once";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE11_SELECT_M)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = masse.CalculMasse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "stone";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "stone";
+                        }
+                    }
                 }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_L)
+
+
+
+
+                if (ConvertConsole2.ConsoleMain.Record.list_Temps == true)
                 {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "metre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "metre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "nanoseconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "nanoseconde";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "microseconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "microseconde";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "milliseconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "milliseconde";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "seconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "seconde";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "minute";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "minute";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "heure";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "heure";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE7_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "jour";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "jour";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE8_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "semaine";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "semaine";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE9_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "mois";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "mois";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE10_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "annee";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "annee";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE11_SELECT_T)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = temps.CalculTemps;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "lustre";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "lustre";
+                        }
+                    }
                 }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_L)
+
+
+
+
+
+
+                if (ConvertConsole2.ConsoleMain.Record.list_Vitesse == true)
                 {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "banane"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "banane"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "centimetre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "centimetre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "millimetre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "millimetre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE7_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "micrometre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "micrometre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE8_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "nanometre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "nanometre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE9_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "mile"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "mile"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE10_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "yard"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "yard"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE11_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "pied"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "pied"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE12_SELECT_L)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "pouce"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "pouce"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-            }
-            if (ConvertConsole2.ConsoleMain.Record.list_Masse == true)
-            {
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "tonne"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "tonne"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "kilogramme"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "kilogramme"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "gramme"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "gramme"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "eiffel"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "eiffel"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "banane"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "banane"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "milligramme"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "milligramme"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE7_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "tonne longue"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "tonne longue"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE8_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "tonne courte"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "tonne courte"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE9_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "livre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "livre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE10_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "once"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "once"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE11_SELECT_M)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "stone"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "stone"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-            }
-            if (ConvertConsole2.ConsoleMain.Record.list_Temps == true)
-            {
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "nanoseconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "nanoseconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "microseconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "microseconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "milliseconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "milliseconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "minute"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "minute"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE7_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "jour"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "jour"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE8_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "semaine"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "semaine"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE9_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "mois"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "mois"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE10_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "annee"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "annee"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE11_SELECT_T)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "lustre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "lustre"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-            }
-            if (ConvertConsole2.ConsoleMain.Record.list_Vitesse == true)
-            {
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_V)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "metre/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "metre/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_V)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "metre/heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "metre/heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_V)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre/heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "kilometre/heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_V)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "kilometre/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_V)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "mile/heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "mile/heure"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1); }
-                }
-                if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_V)
-                {
-                    if (ConvertConsole2.ConsoleMain.Record.unit_select == true) { ConvertConsole2.ConsoleMain.Record.unit2 = "pied/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit2); }
-                    else { ConvertConsole2.ConsoleMain.Record.unit1 = "pied/seconde"; Console.Write(ConvertConsole2.ConsoleMain.Record.unit1);  }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_V)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = vitesse.CalculVitesse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "metre/seconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "metre/seconde";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE2_SELECT_V)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = vitesse.CalculVitesse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "metre/heure";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "metre/heure";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE3_SELECT_V)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = vitesse.CalculVitesse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre/heure";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "kilometre/heure";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE4_SELECT_V)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = vitesse.CalculVitesse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre/seconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "kilometre/seconde";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE5_SELECT_V)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = vitesse.CalculVitesse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "mile/heure";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "mile/heure";
+                        }
+                    }
+                    if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE6_SELECT_V)
+                    {
+                        if (ConvertConsole2.ConsoleMain.Record.unit_select == true)
+                        {
+                            Record.Cacule = vitesse.CalculVitesse;
+                            ConvertConsole2.ConsoleMain.Record.unit2 = "pied/seconde";
+
+                            ConvertConsole2.ConsoleMain.Record.fini = true;
+                        }
+                        else
+                        {
+                            ConvertConsole2.ConsoleMain.Record.unit1 = "pied/seconde";
+                        }
+                    }
                 }
             }
         }
@@ -493,8 +888,7 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
 
 void FormulaireDevise()
 {
-    Console.WriteLine("Choisissez votre referentiel entre :");
-    Console.WriteLine("Longueur < ");
+    Console.WriteLine("Choisissez votre referentiel entre :"); Console.WriteLine("Longueur < ");
     Console.WriteLine("Masse    < ");
     Console.WriteLine("Temps    < ");
     Console.WriteLine("Vitesse  < ");
@@ -503,13 +897,22 @@ void FormulaireDevise()
     Console.WriteLine("Appuyer sur [X] pour quitter");
 }
 
+void SaisieNombre()
+{
+    Console.Write("Nombre à convertir : ");
+    var str = Console.ReadLine();
+    double num = 0;
+
+    while (double.TryParse(str, out num) == false)
+    {
+        Console.Clear();
+        FormulaireDevise();
+        Console.Write("Nombre à convertir : ");
+    }
+    Record.num1 = num;
+}
+
 void Formulaire()
 {
-    Console.Write("1er - le nombre à convertir : ");
-    ConvertConsole2.ConsoleMain.Record.num1 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("2ieme - l'unité de base à convertir : ");
-    ConvertConsole2.ConsoleMain.Record.unit1 = Console.ReadLine();
-    Console.Write("3ieme - l'unité de convertion : ");
-    ConvertConsole2.ConsoleMain.Record.unit2 = Console.ReadLine();
-    Console.Clear();
+    Console.WriteLine("Le résultat est : " + Record.result + " .");
 }

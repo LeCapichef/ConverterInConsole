@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApp2.Main;
+using ConvertConsole2.ConsoleMain;
 
 namespace ConsoleApp2.Main.Temps
 {
     public class ConsoleTemps
     {
+        public ConsoleTemps(Action? afficheResultat, Action? affichePromptInput)
+        {
+            Record.AfficheResultat = afficheResultat;
+            Record.AffichePromptInput = affichePromptInput;
+        }
 
-        double num1;
-        double result = 0;
-        string unit1 = ConvertConsole2.ConsoleMain.Record.unit1;
-        string unit2 = ConvertConsole2.ConsoleMain.Record.unit2;
         double ratio;
         double ratioCalc1 = 1;
         double ratioCalc2 = 1;
@@ -42,140 +44,123 @@ namespace ConsoleApp2.Main.Temps
         }
 
 
-        public void Formulaire()
-        {
-            Console.Write("1er - le nombre à convertir : ");
-            while (double.TryParse(Console.ReadLine(), out num1) == false)
-            {
-                Console.Write("1er - le nombre à convertir : ");
-            }
-            //num1 = Convert.ToInt64(Console.ReadLine());
-            Console.Write("2ieme - l'unité de base à convertir : ");
-            unit1 = Console.ReadLine();
-            Console.Write("3ieme - l'unité de convertion : ");
-            unit2 = Console.ReadLine();
-
-        }
-
-
-        //Temps/////////////////////////////////////////////////////
+        //Temps////////////////////////////////////////
 
 
         public void CalculTemps()
         {
-            if (unit1 == "x" || unit1 == "X" || unit1 == "quitter" || unit1 == "Quitter")
+            if (Record.unit1 == "x" || Record.unit1 == "X" || Record.unit1 == "quitter" || Record.unit1 == "Quitter")
             {
                 Console.WriteLine("Vous allez quitter l'application");
                 Environment.Exit(0);
             }
-            if (unit2 == "x" || unit2 == "X" || unit2 == "quitter" || unit2 == "Quitter")
+            if (Record.unit2 == "x" || Record.unit2 == "X" || Record.unit2 == "quitter" || Record.unit2 == "Quitter")
             {
                 Environment.Exit(0);
             }
-            if (unit1 == "c" || unit1 == "C" || unit1 == "clear" || unit1 == "Clear")
+            if (Record.unit1 == "c" || Record.unit1 == "C" || Record.unit1 == "clear" || Record.unit1 == "Clear")
             {
                 Console.Clear();
             }
-            if (unit2 == "c" || unit2 == "C" || unit2 == "clear" || unit2 == "Clear")
+            if (Record.unit2 == "c" || Record.unit2 == "C" || Record.unit2 == "clear" || Record.unit2 == "Clear")
             {
                 Console.Clear();
             }
-            if (((unit1 == "1" || unit1 == "2" || unit1 == "3" || unit1 == "4" || unit1 == "5" || unit1 == "6" || unit1 == "7" || unit1 == "8" || unit1 == "9" || unit1 == "10" || unit1 == "11") && (unit2 == "1" || unit2 == "2" || unit2 == "3" || unit2 == "4" || unit2 == "5" || unit2 == "3" || unit2 == "7" || unit2 == "8" || unit2 == "9" || unit2 == "10" || unit2 == "11")) || ((unit1 == "nanoseconde" || unit1 == "microseconde" || unit1 == "milliseconde" || unit1 == "seconde" || unit1 == "minute" || unit1 == "heure" || unit1 == "jour" || unit1 == "mois" || unit1 == "annee" || unit1 == "lustre" || unit1 == "semaine" || unit1 == "année" || unit1 == "x" || unit1 == "X") && (unit2 == "nanoseconde" || unit2 == "microseconde" || unit2 == "milliseconde" || unit2 == "seconde" || unit2 == "minute" || unit2 == "heure" || unit2 == "jour" || unit2 == "mois" || unit2 == "annee" || unit2 == "lustre" || unit2 == "semaine" || unit2 == "année" || unit2 == "x" || unit2 == "X")))
+            if (((Record.unit1 == "1" || Record.unit1 == "2" || Record.unit1 == "3" || Record.unit1 == "4" || Record.unit1 == "5" || Record.unit1 == "6" || Record.unit1 == "7" || Record.unit1 == "8" || Record.unit1 == "9" || Record.unit1 == "10" || Record.unit1 == "11") && (Record.unit2 == "1" || Record.unit2 == "2" || Record.unit2 == "3" || Record.unit2 == "4" || Record.unit2 == "5" || Record.unit2 == "3" || Record.unit2 == "7" || Record.unit2 == "8" || Record.unit2 == "9" || Record.unit2 == "10" || Record.unit2 == "11")) || ((Record.unit1 == "nanoseconde" || Record.unit1 == "microseconde" || Record.unit1 == "milliseconde" || Record.unit1 == "seconde" || Record.unit1 == "minute" || Record.unit1 == "heure" || Record.unit1 == "jour" || Record.unit1 == "mois" || Record.unit1 == "annee" || Record.unit1 == "lustre" || Record.unit1 == "semaine" || Record.unit1 == "année" || Record.unit1 == "x" || Record.unit1 == "X") && (Record.unit2 == "nanoseconde" || Record.unit2 == "microseconde" || Record.unit2 == "milliseconde" || Record.unit2 == "seconde" || Record.unit2 == "minute" || Record.unit2 == "heure" || Record.unit2 == "jour" || Record.unit2 == "mois" || Record.unit2 == "annee" || Record.unit2 == "lustre" || Record.unit2 == "semaine" || Record.unit2 == "année" || Record.unit2 == "x" || Record.unit2 == "X")))
             {
 
-                if (unit1 == "nanoseconde" || unit1 == "1")
+                if (Record.unit1 == "nanoseconde" || Record.unit1 == "1")
                 {
                     ratioCalc1 = 0.000000001;
                 }
-                if (unit1 == "microseconde" || unit1 == "2")
+                if (Record.unit1 == "microseconde" || Record.unit1 == "2")
                 {
                     ratioCalc1 = 0.000001;
                 }
-                if (unit1 == "milliseconde" || unit1 == "3")
+                if (Record.unit1 == "milliseconde" || Record.unit1 == "3")
                 {
                     ratioCalc1 = 0.001;
                 }
-                if (unit1 == "seconde" || unit1 == "4")
+                if (Record.unit1 == "seconde" || Record.unit1 == "4")
                 {
                     ratioCalc1 = 1;
                 }
-                if (unit1 == "minute" || unit1 == "5")
+                if (Record.unit1 == "minute" || Record.unit1 == "5")
                 {
                     ratioCalc1 = 60;
                 }
-                if (unit1 == "heure" || unit1 == "6")
+                if (Record.unit1 == "heure" || Record.unit1 == "6")
                 {
                     ratioCalc1 = 3600;
                 }
-                if (unit1 == "jour" || unit1 == "7")
+                if (Record.unit1 == "jour" || Record.unit1 == "7")
                 {
                     ratioCalc1 = 86400;
                 }
-                if (unit1 == "mois" || unit1 == "9")
+                if (Record.unit1 == "mois" || Record.unit1 == "9")
                 {
                     ratioCalc1 = 2592000;
                 }
-                if (unit1 == "année" || unit1 == "annee" || unit1 == "10")
+                if (Record.unit1 == "année" || Record.unit1 == "annee" || Record.unit1 == "10")
                 {
                     ratioCalc1 = 31104000;
                 }
-                if (unit1 == "lustre" || unit1 == "Lustre" || unit1 == "11")
+                if (Record.unit1 == "lustre" || Record.unit1 == "Lustre" || Record.unit1 == "11")
                 {
                     ratioCalc1 = 155520000;
                 }
-                if (unit1 == "semaine" || unit1 == "semaine")
+                if (Record.unit1 == "semaine" || Record.unit1 == "semaine" || Record.unit1 == "8")
                 {
                     ratioCalc1 = 604800;
                 }
 
                 //unité de convertion 
-                if (unit2 == "nanoseconde" || unit2 == "1")
+                if (Record.unit2 == "nanoseconde" || Record.unit2 == "1")
                 {
                     ratioCalc2 = 0.000000001;
                 }
-                if (unit2 == "microseconde" || unit2 == "2")
+                if (Record.unit2 == "microseconde" || Record.unit2 == "2")
                 {
                     ratioCalc2 = 0.000001;
                 }
-                if (unit2 == "milliseconde" || unit2 == "3")
+                if (Record.unit2 == "milliseconde" || Record.unit2 == "3")
                 {
                     ratioCalc2 = 0.001;
                 }
-                if (unit2 == "seconde" || unit2 == "4")
+                if (Record.unit2 == "seconde" || Record.unit2 == "4")
                 {
                     ratioCalc2 = 1;
                 }
-                if (unit2 == "minute" || unit2 == "5")
+                if (Record.unit2 == "minute" || Record.unit2 == "5")
                 {
                     ratioCalc2 = 60;
                 }
-                if (unit2 == "heure" || unit2 == "6")
+                if (Record.unit2 == "heure" || Record.unit2 == "6")
                 {
                     ratioCalc2 = 3600;
                 }
-                if (unit2 == "jour" || unit2 == "7")
+                if (Record.unit2 == "jour" || Record.unit2 == "7")
                 {
                     ratioCalc2 = 86400;
                 }
-                if (unit2 == "semaine" || unit2 == "8")
+                if (Record.unit2 == "semaine" || Record.unit2 == "8")
                 {
                     ratioCalc2 = 604800;
                 }
-                if (unit2 == "mois" || unit2 == "9")
+                if (Record.unit2 == "mois" || Record.unit2 == "9")
                 {
                     ratioCalc2 = 2592000;
                 }
-                if (unit2 == "année" || unit2 == "annee" || unit2 == "10")
+                if (Record.unit2 == "année" || Record.unit2 == "annee" || Record.unit2 == "10")
                 {
                     ratioCalc2 = 31104000;
                 }
-                if (unit2 == "lustre" || unit2 == "Lustre" || unit2 == "11")
+                if (Record.unit2 == "lustre" || Record.unit2 == "Lustre" || Record.unit2 == "11")
                 {
                     ratioCalc2 = 155520000;
                 }
                 ratio = ratioCalc1 / ratioCalc2;
-                result = num1 * ratio;
-                Console.WriteLine("Le résultat est : " + result + " .");
+                Record.result = Record.num1 * ratio;
             }
         }
     }

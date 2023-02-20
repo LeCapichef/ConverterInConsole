@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApp2.Main;
+using ConvertConsole2.ConsoleMain;
 
 namespace ConsoleApp2.Main.Masse
 {
     public class ConsoleMasse
     {
+        public ConsoleMasse(Action? afficheResultat, Action? affichePromptInput)
+        {
+            Record.AfficheResultat = afficheResultat;
+            Record.AffichePromptInput = affichePromptInput;
+        }
 
-        double num1;
-        double result = 0;
-        string unit1 = ConvertConsole2.ConsoleMain.Record.unit1;
-        string unit2 = ConvertConsole2.ConsoleMain.Record.unit2;
         double ratio;
         double ratioCalc1 = 1;
         double ratioCalc2 = 1;
@@ -41,146 +43,119 @@ namespace ConsoleApp2.Main.Masse
             Console.WriteLine("Appuyer sur [X] pour quitter");
         }
 
-
-        public void Formulaire()
-        {
-            Console.Write("1er - le nombre à convertir : ");
-            while (double.TryParse(Console.ReadLine(), out num1) == false)
-            {
-                Console.Write("1er - le nombre à convertir : ");
-            }
-            //num1 = Convert.ToInt64(Console.ReadLine());
-            Console.Write("2ieme - l'unité de base à convertir : ");
-            unit1 = Console.ReadLine();
-            Console.Write("3ieme - l'unité de convertion : ");
-            unit2 = Console.ReadLine();
-        }
-
-
-        //Masse/////////////////////////////////////////////////////
-
+        //Masse////////////////////////////////////////
 
         public void CalculMasse()
         {
-            if (unit1 == "x" || unit1 == "X" || unit1 == "quitter" || unit1 == "Quitter")
+            if (Record.unit1 == "x" || Record.unit1 == "X" || Record.unit1 == "quitter" || Record.unit1 == "Quitter")
             {
                 Console.WriteLine("Vous allez quitter l'application");
                 Environment.Exit(0);
             }
-            if (unit2 == "x" || unit2 == "X" || unit2 == "quitter" || unit2 == "Quitter")
+            if (Record.unit2 == "x" || Record.unit2 == "X" || Record.unit2 == "quitter" || Record.unit2 == "Quitter")
             {
                 Environment.Exit(0);
             }
-            if (unit1 == "c" || unit1 == "C" || unit1 == "clear" || unit1 == "Clear")
+            if (Record.unit1 == "c" || Record.unit1 == "C" || Record.unit1 == "clear" || Record.unit1 == "Clear")
             {
                 Console.Clear();
             }
-            if (unit2 == "c" || unit2 == "C" || unit2 == "clear" || unit2 == "Clear")
-            {
-                Console.Clear();
-            }
-            if (((unit1 == "1" || unit1 == "2" || unit1 == "3" || unit1 == "6" || unit1 == "5" || unit1 == "4" || unit1 == "7" || unit1 == "8" || unit1 == "11" || unit1 == "9" || unit1 == "10") && (unit2 == "1" || unit2 == "2" || unit2 == "3" || unit2 == "4" || unit2 == "5" || unit2 == "6" || unit2 == "7" || unit2 == "8" || unit2 == "9" || unit2 == "10" || unit2 == "11")) || ((unit1 == "tonne" || unit1 == "kilogramme" || unit1 == "gramme" || unit1 == "milligramme" || unit1 == "banane" || unit1 == "eiffel" || unit1 == "tonne longue" || unit1 == "tonne courte" || unit1 == "stone" || unit1 == "livre" || unit1 == "once" || unit1 == "x" || unit1 == "X") && (unit2 == "tonne" || unit2 == "kilogramme" || unit2 == "gramme" || unit2 == "milligramme" || unit2 == "banane" || unit2 == "eiffel" || unit2 == "tonne longue" || unit2 == "tonne courte" || unit2 == "stone" || unit2 == "livre" || unit2 == "once" || unit2 == "x" || unit2 == "X")))
+            if (((Record.unit1 == "1" || Record.unit1 == "2" || Record.unit1 == "3" || Record.unit1 == "6" || Record.unit1 == "5" || Record.unit1 == "4" || Record.unit1 == "7" || Record.unit1 == "8" || Record.unit1 == "11" || Record.unit1 == "9" || Record.unit1 == "10") && (Record.unit2 == "1" || Record.unit2 == "2" || Record.unit2 == "3" || Record.unit2 == "4" || Record.unit2 == "5" || Record.unit2 == "6" || Record.unit2 == "7" || Record.unit2 == "8" || Record.unit2 == "9" || Record.unit2 == "10" || Record.unit2 == "11")) || ((Record.unit1 == "tonne" || Record.unit1 == "kilogramme" || Record.unit1 == "gramme" || Record.unit1 == "milligramme" || Record.unit1 == "banane" || Record.unit1 == "eiffel" || Record.unit1 == "tonne longue" || Record.unit1 == "tonne courte" || Record.unit1 == "stone" || Record.unit1 == "livre" || Record.unit1 == "once" || Record.unit1 == "x" || Record.unit1 == "X") && (Record.unit2 == "tonne" || Record.unit2 == "kilogramme" || Record.unit2 == "gramme" || Record.unit2 == "milligramme" || Record.unit2 == "banane" || Record.unit2 == "eiffel" || Record.unit2 == "tonne longue" || Record.unit2 == "tonne courte" || Record.unit2 == "stone" || Record.unit2 == "livre" || Record.unit2 == "once" || Record.unit2 == "x" || Record.unit2 == "X")))
             {
 
-                if (unit1 == "Tonne" || unit1 == "tonne" || unit1 == "1")
+                if (Record.unit1 == "Tonne" || Record.unit1 == "tonne" || Record.unit1 == "1")
                 {
                     ratioCalc1 = 1000000;
                 }
-                if (unit1 == "kilogramme" || unit1 == "kilo" || unit1 == "2")
+                if (Record.unit1 == "kilogramme" || Record.unit1 == "kilo" || Record.unit1 == "2")
                 {
                     ratioCalc1 = 1000;
                 }
-                if (unit1 == "gramme" || unit1 == "g" || unit1 == "3")
+                if (Record.unit1 == "gramme" || Record.unit1 == "g" || Record.unit1 == "3")
                 {
                     ratioCalc1 = 1;
                 }
-                if (unit1 == "milligramme" || unit1 == "mg" || unit1 == "6")
+                if (Record.unit1 == "milligramme" || Record.unit1 == "mg" || Record.unit1 == "6")
                 {
                     ratioCalc1 = 0.001;
                 }
-                if (unit1 == "banane" || unit1 == "Banane" || unit1 == "5")
+                if (Record.unit1 == "banane" || Record.unit1 == "Banane" || Record.unit1 == "5")
                 {
                     ratioCalc1 = 120;
                 }
-                if (unit1 == "eiffel" || unit1 == "Eiffel" || unit1 == "4")
+                if (Record.unit1 == "eiffel" || Record.unit1 == "Eiffel" || Record.unit1 == "4")
                 {
                     ratioCalc1 = 10100000000;
                 }
-                if (unit1 == "tonne longue" || unit1 == "7")
+                if (Record.unit1 == "tonne longue" || Record.unit1 == "7")
                 {
                     ratioCalc1 = 1016000;
                 }
-                if (unit1 == "tonne courte" || unit1 == "8")
+                if (Record.unit1 == "tonne courte" || Record.unit1 == "8")
                 {
                     ratioCalc1 = 907185;
                 }
-                if (unit1 == "stone" || unit1 == "Stone" || unit1 == "11")
+                if (Record.unit1 == "stone" || Record.unit1 == "Stone" || Record.unit1 == "11")
                 {
                     ratioCalc1 = 6350.29;
                 }
-                if (unit1 == "livre" || unit1 == "Livre" || unit1 == "9")
+                if (Record.unit1 == "livre" || Record.unit1 == "Livre" || Record.unit1 == "9")
                 {
                     ratioCalc1 = 453.592;
                 }
-                if (unit1 == "once" || unit1 == "Once" || unit1 == "10")
+                if (Record.unit1 == "once" || Record.unit1 == "Once" || Record.unit1 == "10")
                 {
                     ratioCalc1 = 28.3495;
                 }
 
                 //unité de convertion 
-                if (unit2 == "Tonne" || unit2 == "tonne" || unit2 == "1")
+                if (Record.unit2 == "Tonne" || Record.unit2 == "tonne" || Record.unit2 == "1")
                 {
                     ratioCalc2 = 1000000;
                 }
-                if (unit2 == "kilogramme" || unit2 == "kilo" || unit2 == "2")
+                if (Record.unit2 == "kilogramme" || Record.unit2 == "kilo" || Record.unit2 == "2")
                 {
                     ratioCalc2 = 1000;
                 }
-                if (unit2 == "gramme" || unit2 == "g" || unit2 == "3")
+                if (Record.unit2 == "gramme" || Record.unit2 == "g" || Record.unit2 == "3")
                 {
                     ratioCalc2 = 1;
                 }
-                if (unit2 == "milligramme" || unit2 == "mg" || unit2 == "6")
+                if (Record.unit2 == "milligramme" || Record.unit2 == "mg" || Record.unit2 == "6")
                 {
                     ratioCalc2 = 0.001;
                 }
-                if (unit2 == "banane" || unit2 == "Banane" || unit2 == "5")
+                if (Record.unit2 == "banane" || Record.unit2 == "Banane" || Record.unit2 == "5")
                 {
                     ratioCalc2 = 120;
                 }
-                if (unit2 == "eiffel" || unit2 == "Eiffel" || unit2 == "4")
+                if (Record.unit2 == "eiffel" || Record.unit2 == "Eiffel" || Record.unit2 == "4")
                 {
                     ratioCalc2 = 10100000000;
                 }
-                if (unit2 == "tonne longue" || unit1 == "tonne" || unit2 == "7")
+                if (Record.unit2 == "tonne longue" || Record.unit1 == "tonne" || Record.unit2 == "7")
                 {
                     ratioCalc2 = 1016000;
                 }
-                if (unit2 == "tonne courte" || unit2 == "8")
+                if (Record.unit2 == "tonne courte" || Record.unit2 == "8")
                 {
                     ratioCalc2 = 907185;
                 }
-                if (unit2 == "stone" || unit2 == "Stone" || unit2 == "11")
+                if (Record.unit2 == "stone" || Record.unit2 == "Stone" || Record.unit2 == "11")
                 {
                     ratioCalc2 = 6350.29;
                 }
-                if (unit2 == "livre" || unit2 == "Livre" || unit2 == "9")
+                if (Record.unit2 == "livre" || Record.unit2 == "Livre" || Record.unit2 == "9")
                 {
                     ratioCalc2 = 453.592;
                 }
-                if (unit2 == "once" || unit2 == "Once" || unit2 == "10")
+                if (Record.unit2 == "once" || Record.unit2 == "Once" || Record.unit2 == "10")
                 {
                     ratioCalc2 = 28.3495;
                 }
                 ratio = ratioCalc1 / ratioCalc2;
-
-                result = num1 * ratio;
-
-
-                Console.WriteLine("Le résultat est : " + result + " .");
-
+                Record.result = Record.num1 * ratio;
             }
-
         }
     }
 }
