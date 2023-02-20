@@ -5,19 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleApp2.Main;
 
-
 namespace ConsoleApp2.Main.Vitesse
 {
-
     public class ConsoleVitesse
     {
 
         double num1;
         double result = 0;
-        string unit1 = "";
-        string unit2 = "";
+        string unit1 = ConvertConsole2.ConsoleMain.Record.unit1;
+        string unit2 = ConvertConsole2.ConsoleMain.Record.unit2;
         double ratio;
-        string devise = "";
         double ratioCalc1 = 1;
         double ratioCalc2 = 1;
 
@@ -56,7 +53,7 @@ namespace ConsoleApp2.Main.Vitesse
         }
 
 
-        //Vitesse////////////////////////////////////////
+        //Vitesse///////////////////////////////////////////////////
 
 
         public void CalculVitesse()
@@ -142,5 +139,4 @@ namespace ConsoleApp2.Main.Vitesse
             }
         }
     }
-
 }

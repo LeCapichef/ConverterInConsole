@@ -6,11 +6,14 @@ using ConsoleApp2.Main.Temps;
 using ConsoleApp2.Main.Vitesse;
 using System;
 using System.Formats.Asn1;
+using System.Numerics;
 
 ConsoleLongueur longueur = new();
 ConsoleVitesse vitesse = new();
 ConsoleMasse masse = new();
 ConsoleTemps temps = new();
+
+
 
 ConsoleListener.MouseEvent += ConsoleListener_MouseEvent;
 ConsoleListener.KeyEvent += ConsoleListener_KeyEvent;
@@ -85,8 +88,6 @@ void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                     vitesse.CalculVitesse();
                     ConvertConsole2.ConsoleMain.Record.list_Vitesse = true;
                 }
-
-
             }
 
             if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_2)

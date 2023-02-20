@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApp2.Main;
+using ConsoleApp2.Main.Temps;
 
 namespace ConsoleApp2.Main.Longueur
 {
@@ -12,8 +13,8 @@ namespace ConsoleApp2.Main.Longueur
 
         double num1;
         double result = 0;
-        string unit1 = "";
-        string unit2 = "";
+        string unit1 = ConvertConsole2.ConsoleMain.Record.unit1;
+        string unit2 = ConvertConsole2.ConsoleMain.Record.unit2;
         double ratio;
         double ratioCalc1 = 1;
         double ratioCalc2 = 1;
@@ -49,14 +50,17 @@ namespace ConsoleApp2.Main.Longueur
             while (double.TryParse(Console.ReadLine(), out num1) == false)
             {
                 Console.Write("1er - le nombre à convertir : ");
-            }
+            }  
             //num1 = Convert.ToInt64(Console.ReadLine());
             Console.Write("2ieme - l'unité de base à convertir : ");
             unit1 = Console.ReadLine();
             Console.Write("3ieme - l'unité de convertion : ");
             unit2 = Console.ReadLine();
-
         }
+
+
+
+        //Longueur//////////////////////////////////////////////////
 
 
         public void CalculLongueur()
