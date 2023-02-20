@@ -9,10 +9,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-
-
 namespace ConvertConsole2.ConsoleMain
 {
     internal class Record
@@ -96,6 +92,12 @@ namespace ConvertConsole2.ConsoleMain
                 if (value != _unit2)
                 {
                     _unit2 = value;
+
+                    if (string.IsNullOrEmpty(_unit2) == false)
+                    {
+                        unit_select = false;
+                    }
+
 
                     if (CanAffichePrompt())
                     {

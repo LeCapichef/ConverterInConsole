@@ -99,7 +99,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                     Console.WriteLine("Clear");
                     Console.Clear();
                     FormulaireDevise();
-
                 }
             }
         }
@@ -162,7 +161,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
 
                     }
                 }
-
             }
 
             if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_1)
@@ -192,10 +190,8 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         Console.Clear();
                         ConvertConsole2.ConsoleMain.Record.list_Masse = false;
                         FormulaireDevise();
-
                     }
                 }
-
             }
 
             if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_1)
@@ -260,7 +256,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
 
                     }
                 }
-
             }
 
             if (r.dwMousePosition.X == ConvertConsole2.ConsoleMain.Record.COL_1)
@@ -288,7 +283,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -303,7 +297,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "eiffel";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -318,7 +311,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "metre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -333,7 +325,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "banane";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -348,7 +339,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "centimetre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -362,7 +352,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "millimetre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -377,7 +366,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "micrometre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -391,7 +379,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "nanometre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -406,7 +393,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "mile";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -421,7 +407,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "yard";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -436,7 +421,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "pied";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -451,7 +435,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = longueur.CalculLongueur;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "pouce";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -473,7 +456,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "tonne";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -489,7 +471,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "kilogramme";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -504,7 +485,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "gramme";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -519,7 +499,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "eiffel";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -534,7 +513,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "banane";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -548,7 +526,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "milligramme";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -562,7 +539,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "tonne longue";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -576,7 +552,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "tonne courte";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -590,7 +565,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "livre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -604,7 +578,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "once";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -618,7 +591,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = masse.CalculMasse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "stone";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -629,8 +601,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                 }
 
 
-
-
                 if (ConvertConsole2.ConsoleMain.Record.list_Temps == true)
                 {
                     if (r.dwMousePosition.Y == ConvertConsole2.ConsoleMain.Record.LIGNE1_SELECT_T)
@@ -639,7 +609,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "nanoseconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -653,7 +622,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "microseconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -667,7 +635,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "milliseconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -681,7 +648,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "seconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -695,7 +661,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "minute";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -709,7 +674,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "heure";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -723,7 +687,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "jour";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -737,7 +700,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "semaine";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -751,7 +713,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "mois";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -765,7 +726,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "annee";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -779,7 +739,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = temps.CalculTemps;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "lustre";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -802,7 +761,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = vitesse.CalculVitesse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "metre/seconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -816,7 +774,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = vitesse.CalculVitesse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "metre/heure";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -830,7 +787,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = vitesse.CalculVitesse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre/heure";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -844,7 +800,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = vitesse.CalculVitesse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "kilometre/seconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -858,7 +813,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = vitesse.CalculVitesse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "mile/heure";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -872,7 +826,6 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
                         {
                             Record.Cacule = vitesse.CalculVitesse;
                             ConvertConsole2.ConsoleMain.Record.unit2 = "pied/seconde";
-
                             ConvertConsole2.ConsoleMain.Record.fini = true;
                         }
                         else
@@ -888,13 +841,17 @@ async void listPeak(NativeMethods.MOUSE_EVENT_RECORD r)
 
 void FormulaireDevise()
 {
-    Console.WriteLine("Choisissez votre referentiel entre :"); Console.WriteLine("Longueur < ");
+    Console.WriteLine("Choisissez votre referentiel entre :"); 
+    Console.WriteLine("Longueur < ");
     Console.WriteLine("Masse    < ");
     Console.WriteLine("Temps    < ");
     Console.WriteLine("Vitesse  < ");
     Console.WriteLine("");
     Console.WriteLine("Appuyer sur [C] pour nettoyer");
     Console.WriteLine("Appuyer sur [X] pour quitter");
+    Record.unit1 = "";
+    Record.unit2 = "";
+    Record.unit_select = false;
 }
 
 void SaisieNombre()

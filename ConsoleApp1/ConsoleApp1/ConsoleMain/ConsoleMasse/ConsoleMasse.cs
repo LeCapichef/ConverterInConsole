@@ -59,102 +59,120 @@ namespace ConsoleApp2.Main.Masse
             if (Record.unit1 == "c" || Record.unit1 == "C" || Record.unit1 == "clear" || Record.unit1 == "Clear")
             {
                 Console.Clear();
+                ratioCalc1 = 0;
+                ratioCalc2 = 0;
             }
             if (((Record.unit1 == "1" || Record.unit1 == "2" || Record.unit1 == "3" || Record.unit1 == "6" || Record.unit1 == "5" || Record.unit1 == "4" || Record.unit1 == "7" || Record.unit1 == "8" || Record.unit1 == "11" || Record.unit1 == "9" || Record.unit1 == "10") && (Record.unit2 == "1" || Record.unit2 == "2" || Record.unit2 == "3" || Record.unit2 == "4" || Record.unit2 == "5" || Record.unit2 == "6" || Record.unit2 == "7" || Record.unit2 == "8" || Record.unit2 == "9" || Record.unit2 == "10" || Record.unit2 == "11")) || ((Record.unit1 == "tonne" || Record.unit1 == "kilogramme" || Record.unit1 == "gramme" || Record.unit1 == "milligramme" || Record.unit1 == "banane" || Record.unit1 == "eiffel" || Record.unit1 == "tonne longue" || Record.unit1 == "tonne courte" || Record.unit1 == "stone" || Record.unit1 == "livre" || Record.unit1 == "once" || Record.unit1 == "x" || Record.unit1 == "X") && (Record.unit2 == "tonne" || Record.unit2 == "kilogramme" || Record.unit2 == "gramme" || Record.unit2 == "milligramme" || Record.unit2 == "banane" || Record.unit2 == "eiffel" || Record.unit2 == "tonne longue" || Record.unit2 == "tonne courte" || Record.unit2 == "stone" || Record.unit2 == "livre" || Record.unit2 == "once" || Record.unit2 == "x" || Record.unit2 == "X")))
             {
-
-                if (Record.unit1 == "Tonne" || Record.unit1 == "tonne" || Record.unit1 == "1")
+                Record.unit_select = false;
+                if (Record.unit_select == false)
                 {
-                    ratioCalc1 = 1000000;
+                    if (Record.unit1 == "Tonne" || Record.unit1 == "tonne" || Record.unit1 == "1")
+                    {
+                        ratioCalc1 = 1000000;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "kilogramme" || Record.unit1 == "kilo" || Record.unit1 == "2")
+                    {
+                        ratioCalc1 = 1000;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "gramme" || Record.unit1 == "g" || Record.unit1 == "3")
+                    {
+                        ratioCalc1 = 1;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "milligramme" || Record.unit1 == "mg" || Record.unit1 == "6")
+                    {
+                        ratioCalc1 = 0.001;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "banane" || Record.unit1 == "Banane" || Record.unit1 == "5")
+                    {
+                        ratioCalc1 = 120;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "eiffel" || Record.unit1 == "Eiffel" || Record.unit1 == "4")
+                    {
+                        ratioCalc1 = 10100000000;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "tonne longue" || Record.unit1 == "7")
+                    {
+                        ratioCalc1 = 1016000;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "tonne courte" || Record.unit1 == "8")
+                    {
+                        ratioCalc1 = 907185;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "stone" || Record.unit1 == "Stone" || Record.unit1 == "11")
+                    {
+                        ratioCalc1 = 6350.29;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "livre" || Record.unit1 == "Livre" || Record.unit1 == "9")
+                    {
+                        ratioCalc1 = 453.592;
+                        Record.unit_select = true;
+                    }
+                    if (Record.unit1 == "once" || Record.unit1 == "Once" || Record.unit1 == "10")
+                    {
+                        ratioCalc1 = 28.3495;
+                        Record.unit_select = true;
+                    }
                 }
-                if (Record.unit1 == "kilogramme" || Record.unit1 == "kilo" || Record.unit1 == "2")
-                {
-                    ratioCalc1 = 1000;
-                }
-                if (Record.unit1 == "gramme" || Record.unit1 == "g" || Record.unit1 == "3")
-                {
-                    ratioCalc1 = 1;
-                }
-                if (Record.unit1 == "milligramme" || Record.unit1 == "mg" || Record.unit1 == "6")
-                {
-                    ratioCalc1 = 0.001;
-                }
-                if (Record.unit1 == "banane" || Record.unit1 == "Banane" || Record.unit1 == "5")
-                {
-                    ratioCalc1 = 120;
-                }
-                if (Record.unit1 == "eiffel" || Record.unit1 == "Eiffel" || Record.unit1 == "4")
-                {
-                    ratioCalc1 = 10100000000;
-                }
-                if (Record.unit1 == "tonne longue" || Record.unit1 == "7")
-                {
-                    ratioCalc1 = 1016000;
-                }
-                if (Record.unit1 == "tonne courte" || Record.unit1 == "8")
-                {
-                    ratioCalc1 = 907185;
-                }
-                if (Record.unit1 == "stone" || Record.unit1 == "Stone" || Record.unit1 == "11")
-                {
-                    ratioCalc1 = 6350.29;
-                }
-                if (Record.unit1 == "livre" || Record.unit1 == "Livre" || Record.unit1 == "9")
-                {
-                    ratioCalc1 = 453.592;
-                }
-                if (Record.unit1 == "once" || Record.unit1 == "Once" || Record.unit1 == "10")
-                {
-                    ratioCalc1 = 28.3495;
-                }
-
                 //unité de convertion 
-                if (Record.unit2 == "Tonne" || Record.unit2 == "tonne" || Record.unit2 == "1")
+                if (Record.unit_select == true)
                 {
-                    ratioCalc2 = 1000000;
+                    if (Record.unit2 == "Tonne" || Record.unit2 == "tonne" || Record.unit2 == "1")
+                    {
+                        ratioCalc2 = 1000000;
+                    }
+                    if (Record.unit2 == "kilogramme" || Record.unit2 == "kilo" || Record.unit2 == "2")
+                    {
+                        ratioCalc2 = 1000;
+                    }
+                    if (Record.unit2 == "gramme" || Record.unit2 == "g" || Record.unit2 == "3")
+                    {
+                        ratioCalc2 = 1;
+                    }
+                    if (Record.unit2 == "milligramme" || Record.unit2 == "mg" || Record.unit2 == "6")
+                    {
+                        ratioCalc2 = 0.001;
+                    }
+                    if (Record.unit2 == "banane" || Record.unit2 == "Banane" || Record.unit2 == "5")
+                    {
+                        ratioCalc2 = 120;
+                    }
+                    if (Record.unit2 == "eiffel" || Record.unit2 == "Eiffel" || Record.unit2 == "4")
+                    {
+                        ratioCalc2 = 10100000000;
+                    }
+                    if (Record.unit2 == "tonne longue" || Record.unit1 == "tonne" || Record.unit2 == "7")
+                    {
+                        ratioCalc2 = 1016000;
+                    }
+                    if (Record.unit2 == "tonne courte" || Record.unit2 == "8")
+                    {
+                        ratioCalc2 = 907185;
+                    }
+                    if (Record.unit2 == "stone" || Record.unit2 == "Stone" || Record.unit2 == "11")
+                    {
+                        ratioCalc2 = 6350.29;
+                    }
+                    if (Record.unit2 == "livre" || Record.unit2 == "Livre" || Record.unit2 == "9")
+                    {
+                        ratioCalc2 = 453.592;
+                    }
+                    if (Record.unit2 == "once" || Record.unit2 == "Once" || Record.unit2 == "10")
+                    {
+                        ratioCalc2 = 28.3495;
+                    }
+                    ratio = ratioCalc1 / ratioCalc2;
+                    Record.result = Record.num1 * ratio;
                 }
-                if (Record.unit2 == "kilogramme" || Record.unit2 == "kilo" || Record.unit2 == "2")
-                {
-                    ratioCalc2 = 1000;
-                }
-                if (Record.unit2 == "gramme" || Record.unit2 == "g" || Record.unit2 == "3")
-                {
-                    ratioCalc2 = 1;
-                }
-                if (Record.unit2 == "milligramme" || Record.unit2 == "mg" || Record.unit2 == "6")
-                {
-                    ratioCalc2 = 0.001;
-                }
-                if (Record.unit2 == "banane" || Record.unit2 == "Banane" || Record.unit2 == "5")
-                {
-                    ratioCalc2 = 120;
-                }
-                if (Record.unit2 == "eiffel" || Record.unit2 == "Eiffel" || Record.unit2 == "4")
-                {
-                    ratioCalc2 = 10100000000;
-                }
-                if (Record.unit2 == "tonne longue" || Record.unit1 == "tonne" || Record.unit2 == "7")
-                {
-                    ratioCalc2 = 1016000;
-                }
-                if (Record.unit2 == "tonne courte" || Record.unit2 == "8")
-                {
-                    ratioCalc2 = 907185;
-                }
-                if (Record.unit2 == "stone" || Record.unit2 == "Stone" || Record.unit2 == "11")
-                {
-                    ratioCalc2 = 6350.29;
-                }
-                if (Record.unit2 == "livre" || Record.unit2 == "Livre" || Record.unit2 == "9")
-                {
-                    ratioCalc2 = 453.592;
-                }
-                if (Record.unit2 == "once" || Record.unit2 == "Once" || Record.unit2 == "10")
-                {
-                    ratioCalc2 = 28.3495;
-                }
-                ratio = ratioCalc1 / ratioCalc2;
-                Record.result = Record.num1 * ratio;
             }
         }
     }
