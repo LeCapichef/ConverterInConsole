@@ -193,8 +193,8 @@ namespace ConvertConsole2.ConsoleMain
         internal const int LIGNE7_PEAK_L = 18;
         internal const int LIGNE6_PEAK_M = 16;
         internal const int LIGNE7_PEAK_M = 17;
-        internal const int LIGNE6_PEAK_T = 17;
-        internal const int LIGNE7_PEAK_T = 18;
+        internal const int LIGNE6_PEAK_T = 16;
+        internal const int LIGNE7_PEAK_T = 17;
         internal const int LIGNE6_PEAK_V = 11;
         internal const int LIGNE7_PEAK_V = 12;
 

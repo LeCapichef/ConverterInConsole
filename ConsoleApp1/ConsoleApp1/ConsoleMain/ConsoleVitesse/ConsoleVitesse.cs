@@ -27,12 +27,12 @@ namespace ConsoleApp2.Main.Vitesse
             Console.WriteLine("Longueur <");
             Console.WriteLine("Masse    < ");
             Console.WriteLine("Temps    < ");
-            Console.WriteLine("Vitesse  > Les unitées disponible sont : 1 - metre/seconde");
-            Console.WriteLine("                                         2 - metre/heure");
-            Console.WriteLine("                                         3 - kilometre/heure");
-            Console.WriteLine("                                         4 - kilometre/seconde");
-            Console.WriteLine("                                         5 - mile/heure");
-            Console.WriteLine("                                         6 - pied/seconde");
+            Console.WriteLine("Vitesse  > Les unitées disponible sont : 1 - metre/seconde (3.6 km/h)");
+            Console.WriteLine("                                         2 - metre/heure (3 600 km/h)");
+            Console.WriteLine("                                         3 - kilometre/heure (1 km/h)");
+            Console.WriteLine("                                         4 - kilometre/seconde (3 600 km/h)");
+            Console.WriteLine("                                         5 - mile/heure (1.609 km/h)");
+            Console.WriteLine("                                         6 - pied/seconde (1.097 km/h)");
             Console.WriteLine("");
             Console.WriteLine("Appuyer sur [C] pour nettoyer");
             Console.WriteLine("Appuyer sur [X] pour quitter");
