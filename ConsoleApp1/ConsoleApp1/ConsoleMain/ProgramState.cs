@@ -1,17 +1,11 @@
-﻿using ConsoleApp2.Main.Longueur;
-using ConsoleApp2.Main.Masse;
-using ConsoleApp2.Main.Temps;
-using ConsoleApp2.Main.Vitesse;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleApp1.ConsoleMain;
 
 namespace ConvertConsole2.ConsoleMain
 {
-    internal class Record
+    /// <summary>
+    /// Etat du programme
+    /// </summary>
+    internal class ProgramState
     {
         private static Action? _AffichePromptInput;
 
@@ -23,7 +17,10 @@ namespace ConvertConsole2.ConsoleMain
 
         private static Action? _Cacule;
 
-        internal static Action? Cacule
+        /// <summary>
+        /// Délégué réalisation l'opération de calcul.
+        /// </summary>
+        internal static Action? ComputeDelegate
         {
             get => _Cacule;
             set => _Cacule = value;
@@ -55,17 +52,18 @@ namespace ConvertConsole2.ConsoleMain
             }
         }
 
-        private static string _unit1 = "";
-        internal static string unit1
-        {
-            get => _unit1;
-            set
-            {
-                if (value != _unit1)
-                {
-                    _unit1 = value;
+        internal static double Result = 0;
 
-                    if (string.IsNullOrEmpty(_unit1) == false)
+        private static IUnit _Unite1 = null;
+        internal static IUnit Unite1 { 
+            get => _Unite1; 
+            set 
+            {
+                if (value != _Unite1)
+                {
+                    _Unite1 = value;
+
+                    if (_Unite1 != null)
                     {
                         unit_select = true;
                     }
@@ -83,21 +81,19 @@ namespace ConvertConsole2.ConsoleMain
             }
         }
 
-        private static string _unit2 = "";
-        internal static string unit2
-        {
-            get => _unit2;
+        private static IUnit _Unite2 = null;
+        internal static IUnit Unite2 {
+            get => _Unite2;
             set
             {
-                if (value != _unit2)
+                if (value != _Unite2)
                 {
-                    _unit2 = value;
+                    _Unite2 = value;
 
-                    if (string.IsNullOrEmpty(_unit2) == false)
+                    if (_Unite2 != null)
                     {
                         unit_select = false;
                     }
-
 
                     if (CanAffichePrompt())
                     {
@@ -112,19 +108,12 @@ namespace ConvertConsole2.ConsoleMain
                 }
             }
         }
-
-        internal static double result = 0;
-
-
-        internal static double ratio;
-        internal static double ratioCalc1 = 1;
-        internal static double ratioCalc2 = 1;
+        
         internal static bool list_Longueur = false;
         internal static bool list_Masse = false;
         internal static bool list_Temps = false;
         internal static bool list_Vitesse = false;
         internal static bool unit_select = false;
-        internal static bool fini = false;
         internal static int compteur = 0;
 
         internal const int BTN_PRESS = 0x0001;
@@ -198,20 +187,24 @@ namespace ConvertConsole2.ConsoleMain
         internal const int LIGNE6_PEAK_V = 11;
         internal const int LIGNE7_PEAK_V = 12;
 
+
         internal static bool CanAffichePrompt()
         {
-            return string.IsNullOrEmpty(unit1) == false
-                && string.IsNullOrEmpty(unit2) == false
-                && _AffichePromptInput != null;
+            //return string.IsNullOrEmpty(Unit1) == false
+            //    && string.IsNullOrEmpty(Unit2) == false
+            //    && _AffichePromptInput != null;
+            return Unite1 != null && Unite2 !=null && _AffichePromptInput != null;
         }
 
         internal static bool CanCalc()
         {
-            return string.IsNullOrEmpty(unit1) == false
-                && string.IsNullOrEmpty(unit2) == false
-                && _num1.HasValue
-                && _Cacule != null
-                && _AfficheResultat != null;
+            //return string.IsNullOrEmpty(Unit1) == false
+            //    && string.IsNullOrEmpty(Unit2) == false
+            //    && _num1.HasValue
+            //    && _Cacule != null
+            //    && _AfficheResultat != null;
+
+            return Unite1 != null && Unite2 != null && _num1.HasValue && _Cacule != null && _AfficheResultat != null;
         }
     }
 }
